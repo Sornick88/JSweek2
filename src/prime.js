@@ -1,9 +1,9 @@
-const input = 4238;
+const input = 4;
 
 function isPrime(val) {
-  let divider = Math.floor(Math.sqrt(val));
-  for (let dv = divider; dv !== 0; dv--) {
-    if (val % divider === 0) {
+  for (let div = Math.floor(Math.sqrt(val)); div > 1; div--) {
+    if (val % div === 0) {
+      console.log(div + ":" + (val - div));
       return false;
     }
   }
@@ -13,7 +13,8 @@ function isPrime(val) {
 function prime(value) {
   let divider = Math.floor(value / 2);
   for (let dv = divider; dv > 1; dv--) {
-    if (!isPrime(dv) && !isPrime(value - dv)) {
+    if (isPrime(dv) && isPrime(value - dv)) {
+      console.log(dv + ":" + (value - dv));
       return dv * (value - dv);
     }
   }
