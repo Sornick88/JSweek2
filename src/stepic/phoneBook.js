@@ -41,18 +41,14 @@ function addPhone(context, cmd) {
 }
 
 function removePhone(context, cmd) {
+  let phoneId = -1;
   let nameId = context.person.findIndex(elem => {
-    let phoneIdx = elem.phones.findIndex(phone =>
-      phone === cmd[1] ? true : false
-    );
-    if (phoneIdx >= 0) return true;
+    phoneId = elem.phones.findIndex(phone => (phone === cmd[1] ? true : false));
+    if (phoneId >= 0) return true;
     return false;
   });
   if (nameId < 0) return;
 
-  let phoneId = context.person[nameId].phones.findIndex(phone =>
-    phone === cmd[1] ? true : false
-  );
   context.person[nameId].phones.splice(phoneId, 1);
   if (context.person[nameId].phones.length < 1) {
     context.person.splice(nameId, 1);
@@ -66,6 +62,7 @@ function show(context, cmd) {
   );
   return buff;
 }
+
 function phoneBookCmdHandler(command) {
   if (typeof command !== "string") return [];
   let cmdArr = command.split(" ");
